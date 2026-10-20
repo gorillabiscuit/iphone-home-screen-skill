@@ -1,5 +1,7 @@
 # iPhone Home Screen skill
 
+**See the video and the before and after pictures: [iphone.wouterschreuders.com](https://iphone.wouterschreuders.com)**
+
 A skill for Claude Code and Codex that tidies a real iPhone Home Screen from a Mac. It groups apps by purpose, orders icons by colour, lines the colours up with a gradient wallpaper, keeps the dock, widgets and folders, and never deletes an app unless you say so.
 
 ![Before and after, work and AI page](images/before-after-work-ai.png)
