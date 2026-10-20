@@ -6,7 +6,8 @@ Run `scripts/preflight.py` first. It checks everything below that a script can c
 
 - A Mac and one iPhone joined by a USB data cable. A USB 2 cable is fine for this. The phone must be unlocked with "Trust This Computer" accepted.
 - Python and pymobiledevice3. The skill was tested with 11.36.0; other versions are untested and the preflight warns about them. Installing software needs the owner's agreement.
-- Nothing else. `scripts/dry_run.py` reads the layout and reports; it writes nothing to the phone.
+- Pillow and numpy, to draw the preview pictures and read icon colours. They need to be importable by the same Python as pymobiledevice3, or the preview can be run in two steps with a saved snapshot. `scripts/preview.py` checks for them before it touches the phone.
+- Nothing else. `scripts/preview.py` and `scripts/dry_run.py` read the layout and report; they write nothing to the phone.
 
 ## To apply changes with iPhone Mirroring (the demonstrated route)
 

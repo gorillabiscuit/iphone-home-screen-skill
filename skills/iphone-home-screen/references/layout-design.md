@@ -1,4 +1,6 @@
-# Layout design
+# Layout design: colour and wallpaper style
+
+This is the author's own style, one option among several. See sorting-options.md for the others and for the evidence. Use this file when the owner chooses purpose pages with colour order and wallpaper bands.
 
 ## Build a visual inventory
 

@@ -1,4 +1,4 @@
 interface:
   display_name: "iPhone Home Screen"
-  short_description: "Organise iPhone apps by purpose and colour"
-  default_prompt: "Use $iphone-home-screen to review my iPhone pages and organise them by purpose and colour without making them too sparse."
+  short_description: "Organise iPhone apps the way you choose"
+  default_prompt: "Use $iphone-home-screen to show me a few ways my iPhone Home Screen could be organised, with pictures, before changing anything."

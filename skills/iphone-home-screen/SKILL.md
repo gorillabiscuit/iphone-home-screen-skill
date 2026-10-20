@@ -1,11 +1,11 @@
 ---
 name: iphone-home-screen
-description: Audit and reorganise a real iPhone Home Screen by purpose, colour and wallpaper using a Mac, iPhone Mirroring and optional USB layout tools. Use for app-page consolidation, icon spacing and related appearance cleanup.
+description: Audit and reorganise a real iPhone Home Screen the way the owner chooses (thumb favourites, by purpose, alphabetical, colour, or their own rules) using a Mac, iPhone Mirroring and optional USB layout tools. Shows a preview of each option first. Use for app-page consolidation, icon spacing and related appearance cleanup.
 ---
 
 # iPhone Home Screen
 
-Make the phone easier to navigate and visually coherent. Treat page membership, icon position, wallpaper and information density as a single design. Work on the real phone only when the user requests changes; a request for ideas or a preview is not an instruction to apply them.
+Make the phone easier to navigate and, if the owner wants, visually coherent. The owner decides how it is sorted; this skill offers options and does not impose one. Treat page membership, icon position, wallpaper and information density as a single design. Work on the real phone only when the user requests changes; a request for ideas or a preview is not an instruction to apply them.
 
 ## Evidence and experiment gate
 
@@ -17,7 +17,7 @@ Use [references/device-workflow.md](references/device-workflow.md) for live read
 
 Run `scripts/preflight.py` and read [references/requirements.md](references/requirements.md). The check changes nothing. If it reports a required failure, say which route is closed and offer what still works: reading the phone, planning offline and a dry run need much less than applying moves with iPhone Mirroring. Do not install software or change settings to clear a failure without the owner's agreement.
 
-Offer a dry run before any change: `scripts/dry_run.py` reports pages, folders, widgets, sparse pages, whether a plan keeps every icon, and how many drags it needs. It writes nothing to the phone. When helping someone else test this skill, follow [references/testing.md](references/testing.md).
+Offer a preview before any change. `scripts/preview.py` draws the owner's own Home Screen and what a chosen arrangement would look like. `scripts/dry_run.py` reports pages, folders, widgets, sparse pages, whether a plan keeps every icon, and how many drags it needs. Neither writes anything to the phone. When helping someone else test this skill, follow [references/testing.md](references/testing.md).
 
 ## Establish the current state
 
@@ -27,24 +27,20 @@ Ask only about decisions that affect the outcome and cannot be inferred. Identif
 
 For an app cleanup, read [references/app-audit.md](references/app-audit.md). Missing usage dates do not prove an app has never been used. Recommend deletions separately from icon moves.
 
-## Plan before moving
+## Choose how it should be sorted
 
-Read [references/layout-design.md](references/layout-design.md). Produce an explicit row-and-column plan with empty slots represented, plus an icon contact sheet or preview when useful. Check the entire sequence of pages, not just each page in isolation.
+Do not pick a sorting scheme for the owner. Read [references/sorting-options.md](references/sorting-options.md), ask the short questions in it, and offer the options that fit: thumb favourites, by purpose, favourites then purpose, alphabetical, colour, purpose with colour inside, context pages, tidy only, or the owner's own rule. Say plainly how strong the evidence is for each. Colour has the weakest case for finding apps and does nothing with tinted or clear icons; that is the owner's call to make with the facts in front of them.
 
-For the style developed in this project, the useful starting point is:
-- Purpose groups determine pages.
-- Dominant icon colours determine adjacent rows.
-- Colour bands follow the chosen wallpaper vertically.
-- Merge related groups before creating extra sparse pages.
-- Keep labels, and put folders together at the end if the user wants that.
+Then show, do not tell. Run `scripts/preview.py` once per option (each run needs a fresh output folder) to draw the current layout and that arrangement, with no changes to the phone. Revise with the owner. When they choose, produce an explicit row-and-column plan with empty slots represented, and check the whole sequence of pages, not each page alone.
 
-These are defaults to adapt, not fixed requirements. Show material tradeoffs rather than optimizing colour at the expense of finding apps.
+The author's own style is one option among these: purpose groups decide the pages, dominant icon colours order the rows, and the colour bands follow the wallpaper. [references/layout-design.md](references/layout-design.md) describes it. Merge related groups before creating extra sparse pages, keep labels, and put folders together at the end only if the owner wants that. Show material tradeoffs rather than optimizing one thing at the expense of finding apps.
 
 Read-only/offline helpers:
 - scripts/backup_positions.py extracts layout metadata from an accessible unencrypted backup and leaves cell numbering unconfirmed until screenshot observations settle it.
 - scripts/classify_icons.py produces background/accent colour candidates and contact sheets from a cached icon manifest. It needs existing Pillow/numpy.
 - scripts/plan_review.py estimates how many drags a compact write would create. Compare this with changing only the affected icons.
 - scripts/layout.py validates inventory and page order without enabling experimental writes.
+- scripts/preview.py reads the phone (or a snapshot) and draws current.png and proposed.png for a chosen option, and saves plan.json. It changes nothing.
 - scripts/preflight.py checks this Mac and phone against the requirements and changes nothing.
 - scripts/dry_run.py reads a snapshot or the phone and reports what a plan would involve, with no changes.
 - scripts/drag_log.py times each move (`run` wraps the drag helper) and turns the log into measured minutes. Never quote a time per move that did not come from this log; say "unmeasured" instead.

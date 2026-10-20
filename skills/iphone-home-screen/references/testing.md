@@ -5,10 +5,10 @@ Most people will not want their phone rearranged. Test in three steps, and stop 
 ## Step 1: no changes (anyone can do this)
 
 1. Run `scripts/preflight.py --json` and keep the output.
-2. Run `scripts/dry_run.py --live --snapshot-out layout.plist --report-out report.json`. This reads the phone and writes nothing to it.
-3. Optionally build a plan and run the dry run again with `--plan plan.json`.
+2. Run `scripts/preview.py --live --out ~/home-screen-preview`. This reads the phone, draws pictures of the tester's own Home Screen now and sorted one way, and writes nothing to the phone. The tester can try other ways (`--strategy alphabetical`, favourites, their own groups) into a fresh folder each time. These pictures are the tester's payoff, so show them off.
+3. Optionally run `scripts/dry_run.py --live --snapshot-out layout.plist --report-out report.json` for the counts.
 
-What to send back: the preflight output, the dry-run summary, and what confused them. The preflight lists the iPhone model and iOS version but not serial numbers. The layout file lists the person's apps, so ask them to share only the page and app counts unless they are happy to share more.
+What to send back: the preflight output, the summary.json from the preview, and what confused them. The pictures show the tester's apps, so they stay with the tester unless they choose to share them. The preflight lists the iPhone model and iOS version but not serial numbers. The layout file lists the person's apps, so ask them to share only the page and app counts unless they are happy to share more.
 
 ## Step 2: a few moves on one page (someone willing)
 
