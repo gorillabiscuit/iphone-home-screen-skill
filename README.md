@@ -61,7 +61,18 @@ For Codex:
 cp -R skills/iphone-home-screen ~/.codex/skills/
 ```
 
+For Gemini CLI, whose documentation says it reads the same folder format. I have not tried this one:
+
+```bash
+cp -R skills/iphone-home-screen ~/.gemini/skills/
+```
+
 Then ask your agent: "Use the iphone-home-screen skill to run the requirements check and show me a few ways my iPhone Home Screen could be organised, with pictures, before changing anything."
+
+## What your agent needs
+
+- To read your phone, draw the previews and plan: any agent that can run commands on your Mac. I tested Claude Code and Codex. Gemini CLI should work and is untested.
+- To move icons through iPhone Mirroring: an agent that can also see the Mac's screen and control the mouse. Claude Code and Codex both have a way to do this, and the original makeover ran in Codex. I have not checked whether Gemini CLI can.
 
 ## Help me test it
 

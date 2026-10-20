@@ -190,6 +190,7 @@
       <h2>Where it stands</h2>
       <p>I have only run it on my own phone, an iPhone 16 Pro Max on iOS 27.0.1, with a Mac on macOS 26.6.2. That is why I need testers.</p>
       <p>The first part only reads your phone and changes nothing. It draws a picture of your own Home Screen as it is and as a chosen arrangement would look, and tells you how many pages, folders and widgets you have and how many drags it would take. Moving icons is the slow part, and you only do it if you want to.</p>
+      <p>Reading your phone and drawing the previews needs any agent that can run commands on your Mac. I have tested Claude Code and Codex. Moving icons also needs an agent that can see your Mac's screen and control the mouse, which Claude Code and Codex both can do.</p>
       <div class="note">
         <p>To move icons you need macOS 15 or later on an Apple silicon or T2 Mac, iOS 18 or later with a passcode set, the same Apple Account on both with two-factor, and iPhone Mirroring working between them. Apple says iPhone Mirroring is not available in the European Union. If you are there, the first part is all you can test.</p>
       </div>
@@ -204,7 +205,7 @@
       </ol>
       <pre><code>git clone https://github.com/gorillabiscuit/iphone-home-screen-skill
 cp -R iphone-home-screen-skill/skills/iphone-home-screen ~/.claude/skills/</code></pre>
-      <p class="caption" style="margin-top:-.5rem;margin-bottom:1.25rem">For Codex, copy it to <code>~/.codex/skills/</code> instead.</p>
+      <p class="caption" style="margin-top:-.5rem;margin-bottom:1.25rem">For Codex, copy it to <code>~/.codex/skills/</code> instead. Gemini CLI says it reads the same folder from <code>~/.gemini/skills/</code>, but I have not tried it.</p>
       <ol class="steps" start="2">
         <li>Plug in your iPhone, unlock it and tap Trust.</li>
         <li>Ask your agent: "Use the iphone-home-screen skill to run the requirements check and show me a few ways my iPhone Home Screen could be organised, with pictures, before changing anything." It asks before it installs anything, and it changes nothing on the phone.</li>

@@ -23,6 +23,11 @@ Confirmed against Apple's "iPhone Mirroring: Use your iPhone from your Mac" supp
 
 Also needed for the drag helper: Xcode Command Line Tools (a Swift compiler) and Accessibility permission for the app that runs it. Only the owner can grant that permission, in System Settings.
 
+## What the agent needs
+
+- To read the phone, draw previews and plan: any agent that can run commands on the Mac. Tested with Claude Code and Codex. Gemini CLI says it reads the same skill folder format and is untested.
+- To move icons through iPhone Mirroring: an agent that can also see the Mac's screen and control the mouse. Claude Code and Codex both have a way to do this. Gemini CLI has not been checked.
+
 ## Optional
 
 - ffmpeg, for before/after images and video.
