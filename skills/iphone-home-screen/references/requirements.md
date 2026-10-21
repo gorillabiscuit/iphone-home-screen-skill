@@ -1,6 +1,6 @@
 # Requirements
 
-Run `scripts/preflight.py` first. It checks everything below that a script can check, changes nothing, and says which routes are open. Run it with the Python that has pymobiledevice3 installed.
+Run `scripts/preflight.py` first. It checks everything below that a script can check, changes nothing, and says which routes are open. Run it with the Python that has pymobiledevice3 installed (see "Installing the Python parts" below).
 
 ## To read the phone and plan (no changes to the phone)
 
@@ -8,6 +8,17 @@ Run `scripts/preflight.py` first. It checks everything below that a script can c
 - Python and pymobiledevice3. The skill was tested with 11.36.0; other versions are untested and the preflight warns about them. Installing software needs the owner's agreement.
 - Pillow and numpy, to draw the preview pictures and read icon colours. They need to be importable by the same Python as pymobiledevice3, or the preview can be run in two steps with a saved snapshot. `scripts/preview.py` checks for them before it touches the phone.
 - Nothing else. `scripts/preview.py` and `scripts/dry_run.py` read the layout and report; they write nothing to the phone.
+
+## Installing the Python parts
+
+On an ordinary Mac the first check fails, because pymobiledevice3 is not installed. Ask the owner before installing anything. The suggested install is a private environment of its own, so the Mac's own Python is left alone:
+
+```bash
+python3 -m venv ~/.iphone-home-screen
+~/.iphone-home-screen/bin/pip install pymobiledevice3==11.36.0 Pillow numpy
+```
+
+Then run every script with that environment's Python, for example `~/.iphone-home-screen/bin/python scripts/preflight.py`, so the check and the scripts see the same libraries. On the tested Mac this took 23 seconds and 225 MB. Deleting the `~/.iphone-home-screen` folder removes it.
 
 ## To apply changes with iPhone Mirroring (the demonstrated route)
 
@@ -39,8 +50,9 @@ The USB link speed is read from the Mac. USB 2 (480 Mb/s) is fast enough for pag
 
 ## Where this has been tested
 
-One phone: iPhone 16 Pro Max, iOS 27.0.1, with macOS 26.6.2 on an Apple-silicon Mac and pymobiledevice3 11.36.0. The original reorganisation used the same phone; the iOS version it ran on was not recorded. Nothing else has been tested. Add rows as testers report back:
+One phone: iPhone 16 Pro Max, iOS 27.0.1, with macOS 26.6.2 on an Apple-silicon Mac and pymobiledevice3 11.36.0. The original reorganisation used the same phone; the iOS version it ran on was not recorded. On 21 October 2026 the same phone was used again for a new-user run from a fresh copy of the skill. Nothing else has been tested. Add rows as testers report back:
 
 | macOS | Mac chip | iPhone model | iOS | pymobiledevice3 | Read and plan | Mirroring moves | Notes |
 |---|---|---|---|---|---|---|---|
 | 26.6.2 | Apple silicon | iPhone 16 Pro Max | 27.0.1 | 11.36.0 | worked (read-only checks) | worked in the original project; not re-run | USB 2 cable only |
+| 26.6.2 | Apple silicon | iPhone 16 Pro Max | 27.0.1 | 11.36.0 | worked (preflight, three previews) | worked (3 icons, 1 failed attempt) | New-user run, 21 October 2026, Claude Code. Agent's own screen control, since precise_drag had no Accessibility permission. USB 2 cable |

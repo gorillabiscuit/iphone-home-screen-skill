@@ -74,6 +74,12 @@ class PreflightTests(unittest.TestCase):
         self.assertEqual(status(pre.evaluate(facts(phones=[])), 'iPhone'), 'fail')
         self.assertEqual(status(pre.evaluate(facts(phones=[PHONE, PHONE])), 'iPhone'), 'fail')
 
+    def test_missing_pmd3_suggests_the_tested_install(self):
+        detail = next(c['detail'] for c in pre.evaluate(facts(pmd3=None, phones=None)) if c['name'] == 'pymobiledevice3')
+        self.assertIn("owner's agreement", detail)
+        self.assertIn('pymobiledevice3==11.36.0 Pillow numpy', detail)
+        self.assertIn('~/.iphone-home-screen/bin/python', detail)
+
     def test_untested_pmd3_version_warns_and_old_python_fails(self):
         self.assertEqual(status(pre.evaluate(facts(pmd3='12.0.0')), 'pymobiledevice3'), 'warn')
         self.assertEqual(status(pre.evaluate(facts(python=(3, 8, 0))), 'Python'), 'fail')
@@ -193,9 +199,19 @@ class SafetyTests(unittest.TestCase):
     def test_no_script_can_write_the_layout(self):
         forbidden = ('set_icon_state(', 'reload_icon_state', 'setIconState', 'shell=True', 'pip install', 'rm -rf')
         for script in S.glob('*.py'):
-            text = script.read_text()
+            lines = script.read_text().splitlines()
+            if script.name == 'preflight.py':
+                # The suggested install is text for the owner to approve; the next test checks nothing runs it.
+                lines = [line for line in lines if not line.startswith('INSTALL = ')]
+            text = '\n'.join(lines)
             for word in forbidden:
                 self.assertNotIn(word, text, f'{script.name} contains {word}')
+
+    def test_the_suggested_install_is_printed_never_run(self):
+        for script in S.glob('*.py'):
+            for line in script.read_text().splitlines():
+                if 'INSTALL' in line:
+                    self.assertNotRegex(line, r'\brun\(|subprocess|Popen|os\.system', f'{script.name} may run the install')
 
 
 if __name__ == '__main__':

@@ -210,6 +210,10 @@ cp -R iphone-home-screen-skill/skills/iphone-home-screen ~/.claude/skills/</code
         <li>Plug in your iPhone, unlock it and tap Trust.</li>
         <li>Ask your agent: "Use the iphone-home-screen skill to run the requirements check and show me a few ways my iPhone Home Screen could be organised, with pictures, before changing anything." It asks before it installs anything, and it changes nothing on the phone.</li>
       </ol>
+      <p>The first check will most likely say pymobiledevice3 is missing. Your agent asks before installing it. This is the suggested install, into a private folder that nothing else on your Mac uses:</p>
+      <pre><code>python3 -m venv ~/.iphone-home-screen
+~/.iphone-home-screen/bin/pip install pymobiledevice3==11.36.0 Pillow numpy</code></pre>
+      <p class="caption" style="margin-top:-.5rem;margin-bottom:1.25rem">The skill's scripts then run with <code>~/.iphone-home-screen/bin/python</code>. It takes about 225 MB. Delete the folder to remove it.</p>
       <p>If you want to go further, the skill has a guide for moving a few icons on one page first, and then a full run with a timer that records how long each move takes.</p>
     </div>
   </section>

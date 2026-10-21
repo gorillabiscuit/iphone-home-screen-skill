@@ -35,7 +35,7 @@ The part that moves icons works through iPhone Mirroring with held mouse drags. 
 
 To read your phone and plan (no changes to the phone):
 - A Mac and an iPhone joined by a USB data cable, with "Trust This Computer" accepted.
-- Python and pymobiledevice3 (tested with 11.36.0), plus Pillow and numpy for the pictures. The skill asks before installing anything.
+- Python and pymobiledevice3 (tested with 11.36.0), plus Pillow and numpy for the pictures. The skill asks before installing anything. The suggested install is under Install below.
 
 To move icons through iPhone Mirroring, Apple's published requirements apply:
 - macOS 15 or later on a Mac with Apple silicon or a T2 chip, and iOS 18 or later with a passcode set.
@@ -68,6 +68,15 @@ cp -R skills/iphone-home-screen ~/.gemini/skills/
 ```
 
 Then ask your agent: "Use the iphone-home-screen skill to run the requirements check and show me a few ways my iPhone Home Screen could be organised, with pictures, before changing anything."
+
+The first check will most likely say pymobiledevice3 is missing. Your agent asks before installing it. This is the suggested install, into a private folder that nothing else on the Mac uses:
+
+```bash
+python3 -m venv ~/.iphone-home-screen
+~/.iphone-home-screen/bin/pip install pymobiledevice3==11.36.0 Pillow numpy
+```
+
+The skill's scripts then run with `~/.iphone-home-screen/bin/python`. On the tested Mac the install took 23 seconds and 225 MB. Delete the `~/.iphone-home-screen` folder to remove it.
 
 ## What your agent needs
 

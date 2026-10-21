@@ -74,6 +74,10 @@ Use current screenshots to calibrate coordinates. The historical capture was 708
 
 If alternative input is authorized, compile precise_drag.swift locally. It checks existing Accessibility access and sends one held drag to the visible Mirroring window. Do not grant broader access silently. Test a reversible move, screenshot before/after every drop, and stop on dialogs, Remove App/Delete App text or unintended folders. Never click an icon's minus badge. Avoid cross-page edge dragging; timing proved unreliable.
 
+precise_drag needs Accessibility permission for the app that runs it, and the agent's own session may not have it. Then the agent's own screen control is the fallback: a held drag sent through its own mouse control, still one move at a time with screenshots.
+
+Measured on 21 October 2026 (iPhone 16 Pro Max, iOS 27.0.1, macOS 26.6.2, the agent's own screen control over Mirroring): a press-and-hold on an icon from the normal Home Screen entered edit mode but did not carry the icon. Hold an empty cell first to enter edit mode, then drag the icon with a held drag: about 0.8 s hold, slow steps, about 1 s pause before release. That worked 3 of 3 times, at about 4.6 s per drag. Edit mode exits by itself after roughly half a minute with no input, so waiting for the owner's yes usually means holding an empty cell again. Mirroring pauses when idle; after Resume it shows page 1, so swipe back and screenshot the working page before the next drag.
+
 HID touch is OPTIONAL AND EXPERIMENTAL. Current upstream code exposes touch_session/send_touchscreen, gated by an active media stream. The research reports iOS 27+ plus Developer Mode and a developer disk image. Check exact installed support; the tested phone meets the reported iOS version threshold, but Developer Mode, media-stream setup and icon-drag reliability were not tested. Developer Mode, new software and permission changes require agreement. Do not equate code availability with verified headless Home Screen editing.
 
 XCUITest, ESP32, VoiceOver and simulator transfer are not default paths. Do not erase, supervise, restore or jailbreak a personal phone for aesthetics.

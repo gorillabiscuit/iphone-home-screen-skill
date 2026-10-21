@@ -293,7 +293,9 @@ def need_imaging():
         try:
             __import__(name)
         except ImportError:
-            sys.exit(f"Needs Pillow and numpy ({name} is missing). Installing them needs the owner's agreement.")
+            import preflight
+            sys.exit(f"Needs Pillow and numpy ({name} is missing). Installing them needs the owner's agreement. "
+                     f"Suggested install, after which every script runs with {preflight.VENV}/bin/python: {preflight.INSTALL}")
 
 
 def classify_all(manifest):
@@ -373,7 +375,7 @@ def build(state, manifest, out, columns=4, rows=6, plan=None, strategy="colour",
     before = current_pages(state, 1, len(state), columns, rows)
     after, after_titles = plan_view(state, plan, columns, rows)
     name = plan.get("strategy", "your plan")
-    draw_pages(before, images, out / "current.png", "Your Home Screen now (empty spaces are not visible in the USB read)", columns, rows)
+    draw_pages(before, images, out / "current.png", "Your Home Screen now: app order only. Empty spaces are not in the USB read, so icons are drawn packed together.", columns, rows)
     draw_pages(after, images, out / "proposed.png", f"Preview: {name} (nothing was moved)", columns, rows, after_titles)
     (out / "plan.json").write_text(json.dumps(plan, indent=2))
     (out / "colours.json").write_text(json.dumps(colours, indent=2))

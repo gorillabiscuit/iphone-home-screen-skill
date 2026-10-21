@@ -20,6 +20,8 @@ MIN_MACOS = (15, 0)         # iPhone Mirroring: Apple's published minimum (macOS
 MIN_IOS_MIRRORING = (18, 0)  # iPhone Mirroring: Apple's published minimum
 MIN_IOS_TOUCH = (27, 0)     # HID touch route: research report, untested for Home Screen drags
 TESTED_PMD3 = "11.36.0"
+VENV = "~/.iphone-home-screen"  # suggested private environment; installing still needs the owner's yes
+INSTALL = f"python3 -m venv {VENV} && {VENV}/bin/pip install pymobiledevice3=={TESTED_PMD3} Pillow numpy"
 MIRRORING_APP = Path("/System/Applications/iPhone Mirroring.app")
 
 
@@ -117,7 +119,8 @@ def evaluate(facts):
     version = facts.get("pmd3")
     if not version:
         out.append(check("pymobiledevice3", "required for reading the phone", "fail",
-                         "Not installed in this Python. Installing needs the owner's agreement. Offline planning from a saved snapshot still works."))
+                         "Not installed in this Python. Installing needs the owner's agreement. Offline planning from a saved snapshot still works. "
+                         f"Suggested install, after which every script runs with {VENV}/bin/python: {INSTALL}"))
     else:
         note = "" if version == TESTED_PMD3 else f"; the skill was tested with {TESTED_PMD3}"
         out.append(check("pymobiledevice3", "required for reading the phone", "pass" if version == TESTED_PMD3 else "warn",
